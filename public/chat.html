@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content=" initial-scale=1.0">
+    <title>Socket-io Chat App</title>
+</head>
+<link rel="stylesheet" href="./chat.css">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;700&display=swap');
+</style>
+
+<body>
+    <div class="container">
+        <h1 class="title" id="title">
+            GROUP CHAT APP
+        </h1>
+        <form class="sm" id="message-form">
+            <div class="form-group">
+                <label for="messagefield">Enter your message</label>
+                <div class="input_fields">
+                    <input type="text" class="form-control" id="messagefield" aria-describedby="messagefield"
+                        placeholder="Text Message">
+                    <input type="text" class="form-control" id="namefield" aria-describedby="namefield"
+                        placeholder="Name">
+
+                </div>
+
+                <small id="emailHelp" class="form-text text-muted">
+                    Share it to the group
+                </small>
+
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+
+        </form>
+
+        <h3 class="message-title">
+            Messages
+        </h3>
+        <div id="messages"></div>
+    </div>
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+
+<script>
+
+    const socket = io('http://localhost:8000', { transports: ['websocket'], allowUpgrades: true })
+    // breaks on first polling ['polling', 'websocket']
+    console.log(socket);
+    console.log('Thisis0lineinindex.html')
+    socket.on('messageFromServer', (msg) => {
+        console.log(msg);
+        document.querySelector('#messages').innerHTML += `<ul id="msg"> <div id="author_name">${msg.name}</div>${msg.text}</ul>`;
+    })
+    document.querySelector('#message-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        // console.log(event);
+        var newMsg = document.querySelector('#messagefield').value;
+        var author = document.querySelector('#namefield').value;
+        if (author === "" || author === null || typeof author === undefined) {
+            author = 'Anonymous'
+        }
+        socket.emit('messageToServer', { text: newMsg, name: author })
+    });
+
+
+</script>
+
+</html>

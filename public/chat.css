@@ -1,0 +1,54 @@
+.title {
+	background-color: #fff;
+	color: #000;
+	font-family: 'Be Vietnam Pro', sans-serif;
+	font-size: 18px;
+	letter-spacing: 0;
+	font-size: 2.5rem;
+	font-weight: 900;
+	line-height: 1.875;
+	color: dodgerblue;
+	margin: 0;
+}
+
+.message-title {
+	background-color: #fff;
+	color: #000;
+	font-family: 'Be Vietnam Pro', sans-serif;
+	font-size: 18px;
+	letter-spacing: 0;
+	font-size: 2.5rem;
+	font-weight: 500;
+	line-height: 1.875;
+	color: lightseagreen;
+	margin: 0;
+}
+
+#msg {
+	background-color: lightgreen;
+	border-radius: 8px;
+	min-width: 10px;
+	width: fit-content;
+	margin-left: 0;
+	padding: 4px 8px 4px 8px;
+	font-size: larger;
+}
+
+.input_fields {
+	display: flex;
+	justify-content: space-between;
+}
+
+#messagefield {
+	flex: 0.7;
+}
+
+#namefield {
+	flex: 0.25;
+}
+
+#author_name {
+	font-size: small;
+	left: 0px;
+	color: steelblue;
+}
